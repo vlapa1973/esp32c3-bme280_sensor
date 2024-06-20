@@ -19,22 +19,17 @@ PubSubClient client(espClient);
 
 //------------------------------------------------
 // const char *ssid = "link";
-const char *ssid = "MikroTik-2";
-const char *pass = "dkfgf#*12091997";
+const char *ssid = "${SSID}";
+const char *pass = "${PASS}";
 
-// const char *mqtt_client = "mqtt_esp32_c3-003";
-const char *mqtt_client = "mqtt_esp32_c3-340029";
+const char *mqtt_client = "${MQTTclient}";
 
-// const char *mqtt_client2 = "esp32_c3-test-3";
-// const char *mqtt_client2 = "Villa_bme280_base";
-// const char *mqtt_client2 = "Villa_bme280_yama";
-const char *mqtt_client2 = "Home_bme280";
-// const char *mqtt_client2 = "esp32c3-балкон";
+const char *mqtt_client2 = "${MQTTclient2}";
 
-const char *mqtt_user = "mqtt";
-const char *mqtt_pass = "qwe#*1243";
-const char *mqtt_server = "178.20.46.157";
-const uint16_t mqtt_port = 1883;
+const char *mqtt_user = "${MQTTuser}";
+const char *mqtt_pass = "${MQTTpass}";
+const char *mqtt_server = "${MQTTserver}";
+const char *mqtt_port = "${MQTTport}";
 
 const char *outTopicTemp = "/Temp";
 const char *outTopicPres = "/Pres";
@@ -118,7 +113,7 @@ void mqttDataOut(float temp, uint16_t pres, uint8_t hum, float vcc)
 //-----------------------------------
 bool reconnect()
 {
-  client.setServer(mqtt_server, mqtt_port);
+  client.setServer(mqtt_server, String(mqtt_port).toInt());
 
   Serial.print("MQTT connect : ");
   Serial.println(mqtt_server);
